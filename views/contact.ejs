@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+
+<main>
+    <h1>Contact</h1>
+
+    <% if (error) { %>
+        <p role="alert"><%= error %></p>
+    <% } %>
+
+    <% if (message) { %>
+        <p role="status"><%= message %></p>
+    <% } %>
+
+    <form action="/contact" method="post" novalidate>
+        <p>
+            <label for="name">Name (up to 100 characters)</label><br>
+            <input id="name" name="name" required maxlength="100"
+                   value="<%= values.name || '' %>">
+        </p>
+        <p>
+            <label for="email">Email</label><br>
+            <input id="email" name="email" type="email" required maxlength="254"
+                   value="<%= values.email || '' %>">
+        </p>
+        <p>
+            <label for="subject">Subject (up to 150 characters)</label><br>
+            <input id="subject" name="subject" required maxlength="150"
+                   value="<%= values.subject || '' %>">
+        </p>
+        <p>
+            <label for="message">Message (up to 2,000 characters)</label><br>
+            <textarea id="message" name="message" required maxlength="2000"
+                      rows="5"><%= values.message || '' %></textarea>
+        </p>
+        <button type="submit">Send message</button>
+    </form>
+</main>
+
+<%- include("partials/footer") %>
