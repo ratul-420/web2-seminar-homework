@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const controller = require("../controllers/mainController");
 const contactController = require("../controllers/contactController");
+const messagesController = require("../controllers/messagesController");
 
 isLoggedIn=(req,res,next)=>{
     if(req.session.user){return next();}
@@ -21,4 +22,5 @@ router.get("/user", isLoggedIn, controller.userIndex);
 router.get("/admin", isAdmin, controller.adminIndex);
 router.get("/contact", contactController.showContact);
 router.post("/contact", contactController.submitContact);
+router.get("/messages", isLoggedIn, messagesController.showMessages);
 module.exports = router;
