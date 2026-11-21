@@ -1,0 +1,24 @@
+<%- include("partials/header") %>
+
+<main>
+    <h1>Messages</h1>
+
+    <% if (messages.length === 0) { %>
+        <p>No messages have been sent yet.</p>
+    <% } %>
+
+    <% messages.forEach((entry) => { %>
+        <article>
+            <h2><%= entry.subject %></h2>
+            <p>
+                From <%= entry.name %> ·
+                <time datetime="<%= entry.createdAt.toISOString() %>">
+                    <%= entry.createdAt.toISOString().slice(0, 19).replace("T", " ") %> UTC
+                </time>
+            </p>
+            <p><%= entry.message %></p>
+        </article>
+    <% }); %>
+</main>
+
+<%- include("partials/footer") %>
