@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+
+<main class="container py-4">
+  <h1>Waste Collection Database</h1>
+
+  <section class="mb-4">
+    <h2>Waste services (<%= services.length %>)</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr><th>ID</th><th>Waste type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <% for (const service of services) { %>
+            <tr>
+              <td><%= service.id %></td>
+              <td><%= service.wtype %></td>
+              <td><%= service.description %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="mb-4">
+    <h2>Collection calendar (<%= calendar.length %>)</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Collection date</th><th>Service ID</th></tr>
+        </thead>
+        <tbody>
+          <% for (const entry of calendar) { %>
+            <tr>
+              <td><%= entry.sdate.toISOString().slice(0, 10) %></td>
+              <td><%= entry.servid %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="mb-4">
+    <h2>Resident requests (<%= requests.length %>)</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Request date</th><th>Service ID</th><th>Quantity</th></tr>
+        </thead>
+        <tbody>
+          <% for (const request of requests) { %>
+            <tr>
+              <td><%= request.demand.toISOString().slice(0, 10) %></td>
+              <td><%= request.servid %></td>
+              <td><%= request.quantity %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
