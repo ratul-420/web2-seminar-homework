@@ -18,6 +18,7 @@ app.use(session({
     })
 }));
 app.use('/database', require('./routes/database'));
+app.use('/graph', require('./routes/graph'));
 app.use((req, res, next) => {
     res.locals.user = req.session.user;
     res.locals.message = req.session.message || "";

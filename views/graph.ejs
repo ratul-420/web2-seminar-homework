@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+
+<main class="container py-4">
+  <h1>Waste Collection Graph</h1>
+  <p>Total requested quantity by waste type</p>
+  <canvas
+    id="waste-chart"
+    role="img"
+    aria-label="Bar chart of total requested quantity by waste type"
+    data-labels="<%= JSON.stringify(labels) %>"
+    data-quantities="<%= JSON.stringify(quantities) %>"
+  ></canvas>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+<script>
+  const canvas = document.getElementById('waste-chart');
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: JSON.parse(canvas.dataset.labels),
+      datasets: [{
+        label: 'Requested quantity',
+        data: JSON.parse(canvas.dataset.quantities),
+        backgroundColor: '#2b826d'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Total requested quantity' }
+        },
+        x: {
+          title: { display: true, text: 'Waste type' }
+        }
+      }
+    }
+  });
+</script>
+
+<%- include('partials/footer') %>
