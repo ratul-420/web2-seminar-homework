@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<main class="container py-4">
+  <h1>Manage Collection Calendar</h1>
+  <p><%= entries.length %> scheduled collections</p>
+
+  <form action="/admin/calendar" method="post" class="mb-4">
+    <div class="mb-2">
+      <label for="sdate" class="form-label">Collection date</label>
+      <input id="sdate" name="sdate" type="date" class="form-control" required>
+    </div>
+    <div class="mb-2">
+      <label for="servid" class="form-label">Service ID</label>
+      <input id="servid" name="servid" type="number" min="1" step="1"
+             class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add collection</button>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr><th>Collection date</th><th>Service ID</th></tr>
+      </thead>
+      <tbody>
+        <% for (const entry of entries) { %>
+          <tr>
+            <td><%= entry.sdate.toISOString().slice(0, 10) %></td>
+            <td><%= entry.servid %></td>
+            <td>
+                <a class="btn btn-sm btn-outline-primary"
+     href="/admin/calendar/<%= entry._id %>/edit">Edit</a>
+  <form class="d-inline" method="post"
+        action="/admin/calendar/<%= entry._id %>/delete"
+        onsubmit="return confirm('Delete this collection?')">
+    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+  </form>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

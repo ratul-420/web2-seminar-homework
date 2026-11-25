@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+<main class="container py-4">
+  <h1>Edit Collection</h1>
+
+  <form action="/admin/calendar/<%= entry._id %>/edit" method="post">
+    <div class="mb-2">
+      <label for="sdate" class="form-label">Collection date</label>
+      <input id="sdate" name="sdate" type="date" class="form-control"
+             value="<%= entry.sdate.toISOString().slice(0, 10) %>" required>
+    </div>
+    <div class="mb-2">
+      <label for="servid" class="form-label">Service ID</label>
+      <input id="servid" name="servid" type="number" min="1" step="1"
+             class="form-control" value="<%= entry.servid %>" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <a class="btn btn-outline-secondary" href="/admin/calendar">Cancel</a>
+  </form>
+</main>
+
+<%- include('partials/footer') %>
